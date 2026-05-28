@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>길건우 | AI Engineering Portfolio</title>
+  <meta name="description" content="길건우 - 조선대학교 인공지능공학부 포트폴리오. Computer Vision, NLP, Data Analysis에 관심을 가진 AI 개발자 지망생." />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root,[data-theme="light"]{--color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;--color-surface-offset:#f0ede8;--color-surface-dynamic:#e6e4df;--color-divider:#dcd9d5;--color-border:#d4d1ca;--color-text:#28251d;--color-text-muted:#6a6965;--color-text-faint:#bab9b4;--color-text-inverse:#f9f8f4;--color-primary:#01696f;--color-primary-hover:#0c4e54;--color-primary-highlight:#cedcd8;--color-accent:#437a22;--radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-full:9999px;--shadow-sm:0 1px 2px oklch(0.2 0.01 80/.06);--shadow-md:0 4px 12px oklch(0.2 0.01 80/.09);--shadow-lg:0 12px 32px oklch(0.2 0.01 80/.13);--transition:180ms cubic-bezier(0.16,1,.3,1);--font-body:'Satoshi','Helvetica Neue',sans-serif;--font-mono:'DM Mono','Courier New',monospace;--text-xs:clamp(.75rem,.7rem + .25vw,.875rem);--text-sm:clamp(.875rem,.8rem + .35vw,1rem);--text-base:clamp(1rem,.95rem + .25vw,1.125rem);--text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);--text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);--text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);--text-hero:clamp(2.8rem,1rem + 5vw,6rem);--space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;--content-narrow:640px;--content-default:960px;--content-wide:1200px}
+    [data-theme="dark"]{--color-bg:#131211;--color-surface:#1a1917;--color-surface-2:#201f1d;--color-surface-offset:#1d1c1a;--color-surface-dynamic:#2d2c2a;--color-divider:#252422;--color-border:#343230;--color-text:#d4d3d0;--color-text-muted:#7a7977;--color-text-faint:#4e4d4b;--color-text-inverse:#1a1917;--color-primary:#4fa8b0;--color-primary-hover:#2d8e97;--color-primary-highlight:#1e3333;--color-accent:#6daa45;--shadow-sm:0 1px 2px oklch(0 0 0/.25);--shadow-md:0 4px 12px oklch(0 0 0/.35);--shadow-lg:0 12px 32px oklch(0 0 0/.45)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:5rem;-webkit-font-smoothing:antialiased}
+    body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg);line-height:1.65;transition:background var(--transition),color var(--transition)}
+    img{display:block;max-width:100%;height:auto}
+    a{color:var(--color-primary);text-decoration:none;transition:color var(--transition)}
+    a:hover{color:var(--color-primary-hover)}
+    h1,h2,h3,h4{line-height:1.2;text-wrap:balance}
+    button{cursor:pointer;font:inherit;color:inherit;background:none;border:none}
+    ::selection{background:oklch(from var(--color-primary) l c h/.2)}
+    :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+
+    .container{max-width:var(--content-default);margin-inline:auto;padding-inline:clamp(var(--space-4),5vw,var(--space-12))}
+    .container--wide{max-width:var(--content-wide)}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding-inline:clamp(var(--space-4),5vw,var(--space-12));background:oklch(from var(--color-bg) l c h/.88);backdrop-filter:blur(14px);border-bottom:1px solid oklch(from var(--color-text) l c h/.07);transition:background var(--transition)}
+    .nav__logo{display:flex;align-items:center;gap:var(--space-2);font-weight:700;font-size:var(--text-sm);color:var(--color-text);letter-spacing:-.01em}
+    .nav__logo svg{color:var(--color-primary)}
+    .nav__links{display:flex;align-items:center;gap:var(--space-6);list-style:none}
+    .nav__links a{font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);transition:color var(--transition)}
+    .nav__links a:hover{color:var(--color-text)}
+    .nav__right{display:flex;align-items:center;gap:var(--space-3)}
+    .theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--color-text-muted);transition:color var(--transition),background var(--transition)}
+    .theme-toggle:hover{background:var(--color-surface-offset);color:var(--color-text)}
+    .nav__hamburger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;align-items:center;justify-content:center;border-radius:var(--radius-md)}
+    .nav__hamburger span{display:block;width:20px;height:2px;background:var(--color-text-muted);border-radius:2px;transition:transform var(--transition),opacity var(--transition)}
+    .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;z-index:99;background:var(--color-surface);border-bottom:1px solid var(--color-divider);padding:var(--space-4) var(--space-6) var(--space-6);flex-direction:column;gap:var(--space-4)}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{font-size:var(--text-base);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) 0;border-bottom:1px solid var(--color-divider)}
+    .mobile-menu a:hover{color:var(--color-primary)}
+
+    /* HERO */
+    .hero{min-height:100dvh;display:grid;place-items:center;padding-top:56px;position:relative;overflow:hidden}
+    .hero__bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 20% 40%,oklch(from var(--color-primary) l c h/.08) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 70%,oklch(from var(--color-accent) l c h/.05) 0%,transparent 55%)}
+    .hero__content{position:relative;z-index:1;max-width:var(--content-default);width:100%;padding-inline:clamp(var(--space-4),5vw,var(--space-12));padding-block:var(--space-20)}
+    .hero__tag{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-primary);padding:var(--space-1) var(--space-3);background:var(--color-primary-highlight);border-radius:var(--radius-full);margin-bottom:var(--space-6)}
+    .hero__name{font-size:var(--text-hero);font-weight:700;color:var(--color-text);letter-spacing:-.03em;line-height:1.05;margin-bottom:var(--space-2)}
+    .hero__name span{color:var(--color-primary)}
+    .hero__title{font-size:var(--text-xl);font-weight:400;color:var(--color-text-muted);letter-spacing:-.01em;margin-bottom:var(--space-6)}
+    .hero__desc{max-width:60ch;font-size:var(--text-base);color:var(--color-text-muted);line-height:1.8;margin-bottom:var(--space-10)}
+    .hero__actions{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-6);font-size:var(--text-sm);font-weight:600;border-radius:var(--radius-lg);transition:all var(--transition);cursor:pointer;text-decoration:none}
+    .btn--primary{background:var(--color-primary);color:var(--color-text-inverse)}
+    .btn--primary:hover{background:var(--color-primary-hover);color:var(--color-text-inverse);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+    .btn--outline{border:1px solid var(--color-border);color:var(--color-text-muted);background:var(--color-surface)}
+    .btn--outline:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-highlight);transform:translateY(-1px)}
+    .hero__stats{display:flex;gap:var(--space-8);margin-top:var(--space-12);padding-top:var(--space-8);border-top:1px solid var(--color-divider);flex-wrap:wrap}
+    .stat__num{font-size:var(--text-xl);font-weight:700;color:var(--color-text);line-height:1}
+    .stat__label{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-1)}
+
+    /* SECTIONS */
+    .section{padding-block:clamp(var(--space-16),8vw,var(--space-24))}
+    .section--alt{background:var(--color-surface)}
+    .section__header{margin-bottom:var(--space-12)}
+    .section__eyebrow{font-size:var(--text-xs);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-2)}
+    .section__title{font-size:var(--text-xl);font-weight:700;color:var(--color-text);letter-spacing:-.02em}
+    .section__sub{margin-top:var(--space-3);font-size:var(--text-base);color:var(--color-text-muted);max-width:55ch}
+    .divider{height:1px;background:var(--color-divider)}
+
+    /* TAGS */
+    .tag{display:inline-flex;align-items:center;font-size:var(--text-xs);font-weight:600;padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);border:1px solid var(--color-border);color:var(--color-text-muted);background:var(--color-surface);transition:all var(--transition)}
+    .tag:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-highlight)}
+    .tag--primary{border-color:var(--color-primary-highlight);color:var(--color-primary);background:var(--color-primary-highlight)}
+
+    /* ABOUT */
+    .about__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:start}
+    .about__text p{color:var(--color-text-muted);margin-bottom:var(--space-4);line-height:1.8}
+    .about__interests{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-6)}
+    .about__goals{display:flex;flex-direction:column;gap:var(--space-4)}
+    .goal-card{padding:var(--space-5) var(--space-6);border-radius:var(--radius-xl);background:var(--color-surface-2);border:1px solid var(--color-border);transition:box-shadow var(--transition),transform var(--transition)}
+    .goal-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+    .goal-card__icon{font-size:1.5rem;margin-bottom:var(--space-3)}
+    .goal-card__title{font-size:var(--text-sm);font-weight:700;color:var(--color-text);margin-bottom:var(--space-1)}
+    .goal-card__text{font-size:var(--text-sm);color:var(--color-text-muted)}
+
+    /* EDU */
+    .edu-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-8);display:grid;grid-template-columns:auto 1fr;gap:var(--space-6);align-items:start;transition:box-shadow var(--transition),transform var(--transition)}
+    .edu-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+    .edu-card__icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-lg);background:var(--color-primary-highlight);color:var(--color-primary);font-size:1.5rem;flex-shrink:0}
+    .edu-card__school{font-size:var(--text-lg);font-weight:700;color:var(--color-text)}
+    .edu-card__dept{font-size:var(--text-base);color:var(--color-primary);font-weight:600;margin-top:var(--space-1)}
+    .edu-card__meta{display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-3)}
+    .edu-card__meta-item{font-size:var(--text-xs);color:var(--color-text-muted);display:flex;align-items:center;gap:var(--space-1)}
+    .edu-card__courses{margin-top:var(--space-5)}
+    .edu-card__courses-title{font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-faint);margin-bottom:var(--space-3)}
+    .courses-list{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+
+    /* SKILLS */
+    .skills__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:var(--space-5)}
+    .skill-group{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6);transition:box-shadow var(--transition),transform var(--transition)}
+    .skill-group:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+    .skill-group__header{display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-5)}
+    .skill-group__icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:var(--color-primary-highlight);color:var(--color-primary);font-size:1rem}
+    .skill-group__title{font-size:var(--text-sm);font-weight:700;color:var(--color-text)}
+    .skill-item{margin-bottom:var(--space-4)}
+    .skill-item:last-child{margin-bottom:0}
+    .skill-item__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-2)}
+    .skill-item__name{font-size:var(--text-sm);font-weight:500;color:var(--color-text)}
+    .skill-item__level{font-size:var(--text-xs);font-family:var(--font-mono);color:var(--color-text-faint)}
+    .skill-bar{height:5px;background:var(--color-surface-offset);border-radius:var(--radius-full);overflow:hidden}
+    .skill-bar__fill{height:100%;background:var(--color-primary);border-radius:var(--radius-full);transition:width 1.2s cubic-bezier(.16,1,.3,1);width:0}
+
+    /* PROJECTS */
+    .projects__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(380px,100%),1fr));gap:var(--space-6)}
+    .project-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);overflow:hidden;transition:box-shadow var(--transition),transform var(--transition)}
+    .project-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+    .project-card__header{padding:var(--space-6);border-bottom:1px solid var(--color-divider);display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-4)}
+    .project-card__title{font-size:var(--text-lg);font-weight:700;color:var(--color-text);letter-spacing:-.01em}
+    .project-card__status{font-size:var(--text-xs);font-weight:600;white-space:nowrap;padding:var(--space-1) var(--space-3);border-radius:var(--radius-full)}
+    .status--planning{background:oklch(.7 .12 80/.15);color:oklch(.5 .12 80)}
+    .status--inprogress{background:var(--color-primary-highlight);color:var(--color-primary)}
+    .status--done{background:oklch(from var(--color-accent) l c h/.15);color:var(--color-accent)}
+    .project-card__body{padding:var(--space-6)}
+    .project-card__summary{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;margin-bottom:var(--space-5)}
+    .project-card__meta{display:grid;grid-template-columns:auto 1fr;gap:var(--space-2) var(--space-4);align-items:baseline;margin-bottom:var(--space-5)}
+    .project-card__meta-key{font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-faint)}
+    .project-card__meta-val{font-size:var(--text-sm);color:var(--color-text-muted)}
+    .project-card__stack{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-bottom:var(--space-5)}
+    .stack-badge{font-size:.7rem;font-family:var(--font-mono);font-weight:500;padding:2px var(--space-2);border-radius:var(--radius-sm);background:var(--color-surface-2);border:1px solid var(--color-border);color:var(--color-text-muted)}
+    .project-card__footer{padding:var(--space-4) var(--space-6);border-top:1px solid var(--color-divider);display:flex;gap:var(--space-3);align-items:center}
+    .link-btn{display:inline-flex;align-items:center;gap:var(--space-1);font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-2);transition:all var(--transition)}
+    .link-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-highlight)}
+
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:var(--space-8)}
+    .timeline::before{content:"";position:absolute;left:0;top:var(--space-3);bottom:var(--space-3);width:2px;background:var(--color-divider)}
+    .timeline-item{position:relative;margin-bottom:var(--space-8)}
+    .timeline-item:last-child{margin-bottom:0}
+    .timeline-item::before{content:"";position:absolute;left:calc(-1*var(--space-8) - 5px);top:var(--space-4);width:12px;height:12px;border-radius:var(--radius-full);background:var(--color-surface);border:2px solid var(--color-primary)}
+    .timeline-item__card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6);transition:box-shadow var(--transition),transform var(--transition)}
+    .timeline-item__card:hover{box-shadow:var(--shadow-md);transform:translateX(4px)}
+    .timeline-item__header{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4);margin-bottom:var(--space-3);flex-wrap:wrap}
+    .timeline-item__title{font-size:var(--text-base);font-weight:700;color:var(--color-text)}
+    .timeline-item__org{font-size:var(--text-sm);color:var(--color-primary);font-weight:600}
+    .timeline-item__period{font-size:var(--text-xs);font-family:var(--font-mono);color:var(--color-text-faint);white-space:nowrap}
+    .timeline-item__desc{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7}
+    .timeline-item__tags{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-4)}
+
+    /* CV */
+    .cv-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-10);display:flex;align-items:center;justify-content:space-between;gap:var(--space-8);flex-wrap:wrap}
+    .cv-card__icon{width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-xl);background:var(--color-primary-highlight);color:var(--color-primary);font-size:2rem}
+    .cv-card__text h3{font-size:var(--text-lg);font-weight:700;color:var(--color-text);margin-bottom:var(--space-2)}
+    .cv-card__text p{font-size:var(--text-sm);color:var(--color-text-muted);max-width:50ch}
+
+    /* CAREER */
+    .career__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:var(--space-4)}
+    .career-track{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6);text-align:center;transition:box-shadow var(--transition),transform var(--transition),border-color var(--transition)}
+    .career-track:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--color-primary)}
+    .career-track__icon{font-size:2rem;margin-bottom:var(--space-3)}
+    .career-track__title{font-size:var(--text-sm);font-weight:700;color:var(--color-text);margin-bottom:var(--space-2)}
+    .career-track__text{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.6}
+
+    /* CONTACT */
+    .contact__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:var(--space-4)}
+    .contact-card{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-5) var(--space-6);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);color:var(--color-text);transition:all var(--transition)}
+    .contact-card:hover{border-color:var(--color-primary);color:var(--color-text);background:var(--color-primary-highlight);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+    .contact-card__icon{width:44px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-lg);background:var(--color-surface-2);color:var(--color-primary);font-size:1.2rem}
+    .contact-card__label{font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:2px}
+    .contact-card__value{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+
+    /* REFS */
+    .ref__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));gap:var(--space-5)}
+    .ref-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);display:flex;align-items:flex-start;gap:var(--space-4);transition:box-shadow var(--transition),transform var(--transition)}
+    .ref-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+    .ref-card__num{font-size:var(--text-xs);font-family:var(--font-mono);font-weight:700;background:var(--color-primary);color:white;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);flex-shrink:0}
+    .ref-card__name{font-size:var(--text-sm);font-weight:700;color:var(--color-text);margin-bottom:2px}
+    .ref-card__desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.6}
+    .ref-card__link{font-size:var(--text-xs);color:var(--color-primary);margin-top:var(--space-2);display:inline-block}
+
+    /* FOOTER */
+    .footer{border-top:1px solid var(--color-divider);padding-block:var(--space-8);text-align:center}
+    .footer__text{font-size:var(--text-xs);color:var(--color-text-faint)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* MOBILE */
+    @media(max-width:768px){.nav__links{display:none!important}.nav__hamburger{display:flex}.about__grid{grid-template-columns:1fr}.cv-card{flex-direction:column;text-align:center}}
+    @media(max-width:480px){.hero__name{font-size:clamp(2.2rem,12vw,3.5rem)}.hero__title{font-size:var(--text-base)}}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__logo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    길건우
+  </div>
+  <ul class="nav__links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav__right">
+    <button class="theme-toggle" data-theme-toggle aria-label="라이트모드로 전환">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <button class="nav__hamburger" id="hamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">About</a><a href="#education">Education</a><a href="#skills">Skills</a>
+  <a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <div class="hero__tag">
+      <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+      AI Engineering Student @ Chosun University
+    </div>
+    <h1 class="hero__name">길 <span>건우</span></h1>
+    <p class="hero__title">AI Developer &amp; Researcher in Training</p>
+    <p class="hero__desc">조선대학교 인공지능공학부에서 공부하며 Computer Vision, Natural Language Processing, Data Analysis를 탐구하고 있습니다. AI 기술로 실생활에 가치를 만드는 개발자·연구자를 목표로 성장 중입니다.</p>
+    <div class="hero__actions">
+      <a href="#projects" class="btn btn--primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        프로젝트 보기
+      </a>
+      <a href="./resume.pdf" class="btn btn--outline" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Resume PDF
+      </a>
+      <a href="#contact" class="btn btn--outline">Contact</a>
+    </div>
+    <div class="hero__stats">
+      <div><div class="stat__num">3+</div><div class="stat__label">프로젝트</div></div>
+      <div><div class="stat__num">5+</div><div class="stat__label">기술 스택</div></div>
+      <div><div class="stat__num">2025</div><div class="stat__label">입학년도</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REFERENCES (Agent Output) -->
+<section class="section" id="references">
+  <div class="container">
+    <div class="section__header reveal">
+      <p class="section__eyebrow">AI Agent Output</p>
+      <h2 class="section__title">참고용 AI · CS GitHub Pages 대표 목록</h2>
+      <p class="section__sub">Agent를 통해 수집한 AI/CS 분야 대표 연구자 및 포트폴리오 사이트 목록입니다.</p>
+    </div>
+    <div class="ref__grid reveal">
+      <div class="ref-card"><div class="ref-card__num">1</div><div><div class="ref-card__name">Andrej Karpathy</div><div class="ref-card__desc">Tesla AI · OpenAI 전 연구원. Neural Net, LLM 분야 대표 블로그 &amp; GitHub Pages.</div><a href="http://karpathy.github.io" target="_blank" rel="noopener" class="ref-card__link">karpathy.github.io ↗</a></div></div>
+      <div class="ref-card"><div class="ref-card__num">2</div><div><div class="ref-card__name">Yann LeCun</div><div class="ref-card__desc">Meta 수석 AI 과학자, NYU 교수. CNN 선구자. 개인 홈페이지 운영.</div><a href="http://yann.lecun.com" target="_blank" rel="noopener" class="ref-card__link">yann.lecun.com ↗</a></div></div>
+      <div class="ref-card"><div class="ref-card__num">3</div><div><div class="ref-card__name">Andrew Ng</div><div class="ref-card__desc">DeepLearning.AI 설립자, Stanford 교수. Coursera AI 강의 창시자.</div><a href="https://www.andrewng.org" target="_blank" rel="noopener" class="ref-card__link">andrewng.org ↗</a></div></div>
+      <div class="ref-card"><div class="ref-card__num">4</div><div><div class="ref-card__name">Academic Pages Template</div><div class="ref-card__desc">Jekyll 기반 학술 포트폴리오 GitHub Pages 공식 템플릿. 연구자·대학원생 표준.</div><a href="https://github.com/academicpages/academicpages.github.io" target="_blank" rel="noopener" class="ref-card__link">academicpages/academicpages ↗</a></div></div>
+      <div class="ref-card"><div class="ref-card__num">5</div><div><div class="ref-card__name">Nikhil Paleti (AI Engineer)</div><div class="ref-card__desc">ML/LLM 전문 AI 엔지니어의 GitHub Pages 포트폴리오. 실무 프로젝트 중심.</div><a href="https://nikhil-paleti.github.io" target="_blank" rel="noopener" class="ref-card__link">nikhil-paleti.github.io ↗</a></div></div>
+      <div class="ref-card"><div class="ref-card__num">6</div><div><div class="ref-card__name">Natassha Selvaraj</div><div class="ref-card__desc">데이터 사이언티스트 GitHub Pages 포트폴리오. 프로젝트·블로그 연동 구성.</div><a href="https://natassha.github.io/natasshaselvaraj/" target="_blank" rel="noopener" class="ref-card__link">natassha.github.io ↗</a></div></div>
+      <div class="ref-card"><div class="ref-card__num">7</div><div><div class="ref-card__name">Marcus Mayo (ML Engineering)</div><div class="ref-card__desc">MLOps·엔드투엔드 ML 파이프라인 중심 포트폴리오. 산업 수준 프로젝트 정리.</div><a href="https://marcusmayo.github.io/machine-learning-portfolio/" target="_blank" rel="noopener" class="ref-card__link">marcusmayo.github.io ↗</a></div></div>
+      <div class="ref-card"><div class="ref-card__num">8</div><div><div class="ref-card__name">Stanford SAIL Faculty</div><div class="ref-card__desc">Fei-Fei Li, Percy Liang 등 Stanford AI Lab 교수진 공식 웹페이지 모음.</div><a href="https://ai.stanford.edu/faculty/" target="_blank" rel="noopener" class="ref-card__link">ai.stanford.edu/faculty ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="section section--alt" id="about">
+  <div class="container">
+    <div class="section__header reveal"><p class="section__eyebrow">01 — About Me</p><h2 class="section__title">자기소개</h2></div>
+    <div class="about__grid">
+      <div class="about__text reveal">
+        <p>안녕하세요! 저는 조선대학교 인공지능공학부에서 공부하고 있는 <strong>길건우</strong>입니다. 인공지능 기술이 실생활 문제를 해결하는 방식에 깊은 관심을 갖고 있습니다.</p>
+        <p>특히 <strong>Computer Vision</strong>과 <strong>Natural Language Processing</strong> 분야에서 모델을 직접 구현하고 실험하는 것을 좋아합니다. 현재는 딥러닝 기초를 탄탄히 다지면서 Python과 PyTorch를 중점적으로 학습 중입니다.</p>
+        <p>코딩 외에도 최신 AI 논문 리뷰와 다양한 공모전 참여를 통해 실전 역량을 키워가고 있습니다.</p>
+        <div style="margin-top:var(--space-6)"><div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-faint);margin-bottom:var(--space-3)">관심 분야</div>
+        <div class="about__interests"><span class="tag tag--primary">Computer Vision</span><span class="tag tag--primary">NLP</span><span class="tag tag--primary">Data Analysis</span><span class="tag">Deep Learning</span><span class="tag">MLOps</span><span class="tag">AI Ethics</span></div></div>
+        <div style="margin-top:var(--space-6)"><div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-faint);margin-bottom:var(--space-3)">현재 학습 중</div>
+        <div class="about__interests"><span class="tag">PyTorch</span><span class="tag">Transformer</span><span class="tag">OpenCV</span><span class="tag">React</span><span class="tag">Docker</span></div></div>
+      </div>
+      <div class="about__goals reveal">
+        <div class="goal-card"><div class="goal-card__icon">🎯</div><div class="goal-card__title">진로 목표</div><div class="goal-card__text">AI 서비스 개발자 또는 AI 연구자로 성장하여, 사람들의 삶을 더 편리하게 만드는 AI 솔루션을 개발하고 싶습니다.</div></div>
+        <div class="goal-card"><div class="goal-card__icon">🔬</div><div class="goal-card__title">AI 분야 관심 주제</div><div class="goal-card__text">Vision-Language Models, 객체 탐지 및 영상 분류, 한국어 NLP, 그리고 Efficient AI(모델 경량화)에 특히 관심이 많습니다.</div></div>
+        <div class="goal-card"><div class="goal-card__icon">📚</div><div class="goal-card__title">학습 방향</div><div class="goal-card__text">논문 구현 스터디, 캐글 대회 참여, 개인 프로젝트를 통해 이론과 실전 경험을 균형 있게 쌓아가고 있습니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="container">
+    <div class="section__header reveal"><p class="section__eyebrow">02 — Education</p><h2 class="section__title">학력</h2></div>
+    <div class="reveal">
+      <div class="edu-card">
+        <div class="edu-card__icon">🎓</div>
+        <div>
+          <div class="edu-card__school">조선대학교 (Chosun University)</div>
+          <div class="edu-card__dept">인공지능공학부 (Dept. of Artificial Intelligence Engineering)</div>
+          <div class="edu-card__meta">
+            <div class="edu-card__meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2025 — 재학 중</div>
+            <div class="edu-card__meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2학년</div>
+            <div class="edu-card__meta-item">GPA: 기재 선택 사항</div>
+          </div>
+          <div class="edu-card__courses">
+            <div class="edu-card__courses-title">주요 수강 과목</div>
+            <div class="courses-list"><span class="tag">Machine Learning</span><span class="tag">Deep Learning</span><span class="tag">Data Structures</span><span class="tag">Web Programming</span><span class="tag">Linear Algebra</span><span class="tag">Algorithm</span><span class="tag">Statistics</span><span class="tag">Computer Vision</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="section section--alt" id="skills">
+  <div class="container">
+    <div class="section__header reveal"><p class="section__eyebrow">03 — Skills</p><h2 class="section__title">기술 스택</h2><p class="section__sub">현재까지 학습하고 프로젝트에 활용한 기술들입니다.</p></div>
+    <div class="skills__grid reveal">
+      <div class="skill-group"><div class="skill-group__header"><div class="skill-group__icon">🐍</div><div class="skill-group__title">Programming</div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">Python</span><span class="skill-item__level">Intermediate</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="70"></div></div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">JavaScript</span><span class="skill-item__level">Basic</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="35"></div></div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">C / C++</span><span class="skill-item__level">Basic</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="30"></div></div></div>
+      </div>
+      <div class="skill-group"><div class="skill-group__header"><div class="skill-group__icon">🤖</div><div class="skill-group__title">AI / ML</div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">PyTorch</span><span class="skill-item__level">Basic</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="38"></div></div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">scikit-learn</span><span class="skill-item__level">Basic</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="42"></div></div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">TensorFlow</span><span class="skill-item__level">Learning</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="22"></div></div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">OpenCV</span><span class="skill-item__level">Basic</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="30"></div></div></div>
+      </div>
+      <div class="skill-group"><div class="skill-group__header"><div class="skill-group__icon">🌐</div><div class="skill-group__title">Web</div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">HTML / CSS</span><span class="skill-item__level">Intermediate</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="60"></div></div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">React</span><span class="skill-item__level">Basic</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="28"></div></div></div>
+      </div>
+      <div class="skill-group"><div class="skill-group__header"><div class="skill-group__icon">🛠</div><div class="skill-group__title">Tools &amp; DB</div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">Git / GitHub</span><span class="skill-item__level">Basic</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="45"></div></div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">Docker</span><span class="skill-item__level">Learning</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="20"></div></div></div>
+        <div class="skill-item"><div class="skill-item__header"><span class="skill-item__name">MySQL / SQLite</span><span class="skill-item__level">Basic</span></div><div class="skill-bar"><div class="skill-bar__fill" data-width="33"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="container container--wide">
+    <div class="section__header reveal"><p class="section__eyebrow">04 — Projects</p><h2 class="section__title">프로젝트</h2><p class="section__sub">개인적으로 수행하거나 계획 중인 프로젝트들입니다.</p></div>
+    <div class="projects__grid reveal">
+      <div class="project-card">
+        <div class="project-card__header"><div class="project-card__title">이미지 분류 모델 구현</div><span class="project-card__status status--inprogress">In Progress</span></div>
+        <div class="project-card__body">
+          <p class="project-card__summary">CNN 기반 이미지 분류 모델을 직접 구현하고, CIFAR-10 데이터셋에서 VGG, ResNet 아키텍처를 비교 실험합니다.</p>
+          <div class="project-card__meta"><span class="project-card__meta-key">기간</span><span class="project-card__meta-val">2025.03 — 진행 중</span><span class="project-card__meta-key">역할</span><span class="project-card__meta-val">단독 개발, 모델 설계 및 학습</span><span class="project-card__meta-key">성과</span><span class="project-card__meta-val">ResNet-18 기반 CIFAR-10 정확도 92% 달성 목표</span></div>
+          <div class="project-card__stack"><span class="stack-badge">Python</span><span class="stack-badge">PyTorch</span><span class="stack-badge">NumPy</span><span class="stack-badge">Matplotlib</span><span class="stack-badge">Jupyter</span></div>
+        </div>
+        <div class="project-card__footer"><a href="https://github.com/username" target="_blank" rel="noopener" class="link-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub</a></div>
+      </div>
+      <div class="project-card">
+        <div class="project-card__header"><div class="project-card__title">한국어 감성 분석 웹 앱</div><span class="project-card__status status--planning">Planning</span></div>
+        <div class="project-card__body">
+          <p class="project-card__summary">KoBERT 모델을 파인튜닝하여 한국어 텍스트의 감성(긍정/부정/중립)을 분류하는 웹 애플리케이션을 개발할 계획입니다.</p>
+          <div class="project-card__meta"><span class="project-card__meta-key">기간</span><span class="project-card__meta-val">2025.09 — 계획</span><span class="project-card__meta-key">역할</span><span class="project-card__meta-val">모델 파인튜닝, 백엔드 API 개발</span><span class="project-card__meta-key">주요 기능</span><span class="project-card__meta-val">실시간 텍스트 감성 분석, 결과 시각화</span></div>
+          <div class="project-card__stack"><span class="stack-badge">Python</span><span class="stack-badge">Transformers</span><span class="stack-badge">Flask</span><span class="stack-badge">React</span><span class="stack-badge">KoBERT</span></div>
+        </div>
+        <div class="project-card__footer"><a href="https://github.com/username" target="_blank" rel="noopener" class="link-btn">GitHub (예정)</a></div>
+      </div>
+      <div class="project-card">
+        <div class="project-card__header"><div class="project-card__title">교내 강의실 예약 시스템</div><span class="project-card__status status--planning">Planning</span></div>
+        <div class="project-card__body">
+          <p class="project-card__summary">팀 프로젝트로, 학생들이 빈 강의실을 실시간으로 확인하고 예약할 수 있는 웹 시스템을 개발할 계획입니다. DB와 REST API 설계 역량을 기릅니다.</p>
+          <div class="project-card__meta"><span class="project-card__meta-key">기간</span><span class="project-card__meta-val">2025.09 — 계획</span><span class="project-card__meta-key">역할</span><span class="project-card__meta-val">백엔드 개발, DB 설계</span><span class="project-card__meta-key">주요 기능</span><span class="project-card__meta-val">실시간 예약, 관리자 페이지, 알림 기능</span></div>
+          <div class="project-card__stack"><span class="stack-badge">Python</span><span class="stack-badge">Django</span><span class="stack-badge">MySQL</span><span class="stack-badge">React</span><span class="stack-badge">REST API</span></div>
+        </div>
+        <div class="project-card__footer"><a href="https://github.com/username" target="_blank" rel="noopener" class="link-btn">GitHub (예정)</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section class="section section--alt" id="experience">
+  <div class="container">
+    <div class="section__header reveal"><p class="section__eyebrow">05 — Experience</p><h2 class="section__title">활동 이력</h2></div>
+    <div class="timeline reveal">
+      <div class="timeline-item"><div class="timeline-item__card"><div class="timeline-item__header"><div><div class="timeline-item__title">인공지능공학부 입학</div><div class="timeline-item__org">조선대학교</div></div><span class="timeline-item__period">2025.03</span></div><p class="timeline-item__desc">인공지능공학부에 입학하여 머신러닝, 딥러닝, 알고리즘 등의 기초 교육 과정을 이수하기 시작했습니다.</p><div class="timeline-item__tags"><span class="tag">Python</span><span class="tag">ML 기초</span></div></div></div>
+      <div class="timeline-item"><div class="timeline-item__card"><div class="timeline-item__header"><div><div class="timeline-item__title">AI·코딩 스터디 그룹 참여</div><div class="timeline-item__org">교내 자율 스터디</div></div><span class="timeline-item__period">2025.04 — 현재</span></div><p class="timeline-item__desc">동기들과 함께 딥러닝 논문 리뷰 및 코딩 문제 풀이 스터디를 진행 중입니다. 매주 AI 관련 논문 1편을 리뷰하고 발표합니다.</p><div class="timeline-item__tags"><span class="tag">Paper Review</span><span class="tag">Algorithm</span></div></div></div>
+      <div class="timeline-item"><div class="timeline-item__card"><div class="timeline-item__header"><div><div class="timeline-item__title">GitHub Pages 포트폴리오 제작 (Web Programming 과제)</div><div class="timeline-item__org">조선대학교 Web Programming 강의</div></div><span class="timeline-item__period">2025.05</span></div><p class="timeline-item__desc">GitHub Pages를 활용하여 개인 CV/Resume 기반 포트폴리오 웹페이지를 직접 제작하고 배포하는 과제를 수행했습니다.</p><div class="timeline-item__tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">GitHub Pages</span></div></div></div>
+      <div class="timeline-item"><div class="timeline-item__card"><div class="timeline-item__header"><div><div class="timeline-item__title">AI 공모전 참가 (계획)</div><div class="timeline-item__org">교내외 AI 대회</div></div><span class="timeline-item__period">2025 하반기 목표</span></div><p class="timeline-item__desc">Kaggle 데이터 사이언스 대회 또는 교내 AI 공모전 참가를 목표로 준비 중입니다. Computer Vision 분야에 도전할 계획입니다.</p><div class="timeline-item__tags"><span class="tag">Kaggle</span><span class="tag">Computer Vision</span><span class="tag">Team Project</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CV -->
+<section class="section" id="cv">
+  <div class="container">
+    <div class="section__header reveal"><p class="section__eyebrow">06 — CV / Resume</p><h2 class="section__title">이력서 다운로드</h2></div>
+    <div class="cv-card reveal">
+      <div style="display:flex;align-items:center;gap:var(--space-5)">
+        <div class="cv-card__icon">📄</div>
+        <div class="cv-card__text"><h3>길건우 Resume / CV</h3><p>최신 이력서 PDF를 다운로드하세요. 학력, 기술 스택, 프로젝트 경험이 포함되어 있습니다.<br><small style="color:var(--color-text-faint)">⚠️ 주민등록번호·주소·전화번호 등 민감정보 미포함</small></p></div>
+      </div>
+      <a href="./resume.pdf" class="btn btn--primary" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download My Resume
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CAREER GOAL -->
+<section class="section section--alt" id="career">
+  <div class="container">
+    <div class="section__header reveal"><p class="section__eyebrow">07 — Career Goal</p><h2 class="section__title">진로 목표 &amp; Future Plan</h2></div>
+    <div class="career__grid reveal">
+      <div class="career-track"><div class="career-track__icon">🤖</div><div class="career-track__title">AI Developer</div><div class="career-track__text">실생활 문제를 해결하는 AI 서비스를 개발하는 엔지니어</div></div>
+      <div class="career-track"><div class="career-track__icon">📊</div><div class="career-track__title">Data Scientist</div><div class="career-track__text">데이터에서 의미 있는 인사이트를 추출하는 분석가</div></div>
+      <div class="career-track"><div class="career-track__icon">👁</div><div class="career-track__title">CV Engineer</div><div class="career-track__text">Computer Vision 전문 AI 엔지니어</div></div>
+      <div class="career-track"><div class="career-track__icon">🎓</div><div class="career-track__title">Graduate / Research</div><div class="career-track__text">AI 분야 대학원 진학 또는 연구소 인턴십 경험 축적</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section__header reveal"><p class="section__eyebrow">08 — Contact</p><h2 class="section__title">연락처</h2><p class="section__sub">프로젝트 협업이나 궁금한 점이 있으시면 편하게 연락 주세요!</p></div>
+    <div class="contact__grid reveal">
+      <a href="mailto:student@example.com" class="contact-card"><div class="contact-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div><div><div class="contact-card__label">Email</div><div class="contact-card__value">student@example.com</div></div></a>
+      <a href="https://github.com/username" target="_blank" rel="noopener" class="contact-card"><div class="contact-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></div><div><div class="contact-card__label">GitHub</div><div class="contact-card__value">github.com/username</div></div></a>
+      <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" class="contact-card"><div class="contact-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div><div><div class="contact-card__label">LinkedIn (Optional)</div><div class="contact-card__value">linkedin.com/in/username</div></div></a>
+      <a href="https://velog.io/@username" target="_blank" rel="noopener" class="contact-card"><div class="contact-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="contact-card__label">Blog (Velog)</div><div class="contact-card__value">velog.io/@username</div></div></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><p class="footer__text">© 2025 길건우 · 조선대학교 인공지능공학부 · Built with GitHub Pages</p></div></footer>
+
+<script>
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d=r.getAttribute('data-theme')||'dark';
+  function setTheme(theme){
+    d=theme;r.setAttribute('data-theme',d);
+    if(t){t.setAttribute('aria-label',d==='dark'?'라이트모드로 전환':'다크모드로 전환');
+    t.innerHTML=d==='dark'
+      ?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      :'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';}
+  }
+  setTheme(d);
+  if(t)t.addEventListener('click',()=>setTheme(d==='dark'?'light':'dark'));
+  const ham=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu');
+  if(ham)ham.addEventListener('click',()=>menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+  const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.skill-bar__fill').forEach(b=>b.style.width=b.getAttribute('data-width')+'%');e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+})();
+</script>
+</body>
+</html>
